@@ -3,17 +3,23 @@ import {
   CoffeeOutlined,
   SearchOutlined,
   UserOutlined,
+  LockOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll } from "framer-motion";
-import { Input, Dropdown, Button, Space, Menu } from "antd";
+import { Input, Dropdown, Button, Space, Menu, Modal, Form } from "antd";
 import FilterSidebar from "@/components/FilterSidebar/filterSidebar";
+import LoginModal from "@/components/Login/login";
+import RegisterModal from "@/components/Register/register";
 
 const { Search } = Input;
 
 const Header = () => {
   const navigate = useNavigate();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const { scrollY } = useScroll();
 
@@ -27,20 +33,59 @@ const Header = () => {
     }
   });
 
-  // 簡化的用戶選單
+  const showLoginModal = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const handleLoginCancel = () => {
+    setIsLoginModalOpen(false);
+  };
+
+  const onLoginFinish = (values) => {
+    console.log("登入資訊:", values);
+    // 這裡之後可以加入與後端的整合
+  };
+
+  const showRegisterModal = () => {
+    setIsRegisterModalOpen(true);
+    setIsLoginModalOpen(false); // 關閉登入 Modal
+  };
+
+  const handleRegisterCancel = () => {
+    setIsRegisterModalOpen(false);
+  };
+
+  const onRegisterFinish = (values) => {
+    console.log("註冊資訊:", values);
+    // 這裡之後可以加入與後端的整合
+  };
+
+  const switchToLogin = () => {
+    setIsRegisterModalOpen(false);
+    setIsLoginModalOpen(true);
+  };
+
+  // 用戶選單
   const userMenu = (
     <Menu
       items={[
         {
           key: "login",
           label: "登入",
-          onClick: () => navigate("/login"),
+          onClick: showLoginModal, // 改為打開 Modal
+        },
+        {
+          key: "register",
+          label: "註冊",
+          onClick: showRegisterModal, // 改為打開 Modal
         },
         {
           key: "logout",
           label: "登出",
           danger: true,
-          onClick: () => console.log("登出"),
+          onClick: () => {
+            console.log("登出");
+          },
         },
       ]}
     />
@@ -108,6 +153,20 @@ const Header = () => {
 
       {/* 佔位元素 */}
       <div className="h-16"></div>
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onCancel={handleLoginCancel}
+        onFinish={onLoginFinish}
+        showRegisterModal={showRegisterModal}
+      />
+
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onCancel={handleRegisterCancel}
+        onFinish={onRegisterFinish}
+        showLoginModal={switchToLogin}
+      />
 
       <FilterSidebar
         isOpen={isFilterOpen}

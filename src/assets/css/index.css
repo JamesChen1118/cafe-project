@@ -7,3 +7,25 @@
 * {
     box-sizing: border-box;
 }
+
+/* 登入 Modal 樣式 */
+.login-modal .ant-modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.login-modal .ant-modal-close {
+    top: 16px;
+    right: 16px;
+}
+
+.login-modal .ant-input-affix-wrapper:hover,
+.login-modal .ant-input-affix-wrapper:focus,
+.login-modal .ant-input-affix-wrapper-focused {
+    border-color: #E74C3C !important;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1) !important;
+}
+
+.login-modal .ant-btn-primary:hover {
+    background-color: #D44337 !important;
+}
