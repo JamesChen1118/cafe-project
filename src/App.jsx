@@ -1,15 +1,8 @@
-import { useState } from 'react';
-import { RouterProvider } from 'react-router-dom';
-import router from './router';
-import { Button } from 'antd';
+import { RouterProvider } from "react-router-dom";
+import router from "@/router";
 
+const App = () => {
+  return <RouterProvider router={router} />;
+};
 
-function App() {
-    return (
-      <RouterProvider router={router}>
-   
-      </RouterProvider>
-  )
-}
-
-export default App
+export default App;

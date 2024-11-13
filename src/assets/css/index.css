@@ -4,7 +4,53 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
 
-* {
-    box-sizing: border-box;
+    /* 基本選單項目樣式 */
+    .ant-menu-light.custom-menu .ant-menu-item {
+        @apply relative text-menu-text transition-all duration-300 ease-in-out text-lg mx-2 px-4;
+    }
+
+    /* 懸停狀態 */
+    .ant-menu-light.custom-menu .ant-menu-item:hover {
+        @apply text-menu-hover bg-menu-bg-hover;
+    }
+
+    /* 選中狀態 */
+    .ant-menu-light.custom-menu .ant-menu-item-selected {
+        @apply bg-menu-bg-selected text-menu-hover;
+    }
+
+    /* 底線基本樣式 */
+    .ant-menu-light.custom-menu .ant-menu-item::after {
+        @apply content-[''] absolute bottom-0 left-0 w-full h-[3px] bg-menu-hover transform scale-x-0 transition-transform duration-300 ease-in-out border-0;
+    }
+
+    /* 選中時的底線 */
+    .ant-menu-light.custom-menu .ant-menu-item-selected::after {
+        @apply scale-x-100 opacity-100;
+    }
+
+    /* 懸停時的底線 */
+    .ant-menu-light.custom-menu .ant-menu-item:hover::after {
+        @apply scale-x-100 opacity-70;
+    }
+}
+
+/* 移除 Ant Design 的默認樣式 */
+.ant-menu-light.custom-menu {
+    @apply border-none;
+}
+
+.ant-menu-light.custom-menu .ant-menu-item::before {
+    @apply hidden;
+}
+
+.ant-menu-light.custom-menu .ant-menu-item:focus-visible {
+    @apply outline-none;
+}
+
+/* 確保選中狀態不會被 Ant Design 覆蓋 */
+.ant-menu-light.custom-menu .ant-menu-item-selected {
+    @apply !bg-menu-bg-selected !text-menu-hover;
 }

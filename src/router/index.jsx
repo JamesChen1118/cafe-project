@@ -1,32 +1,35 @@
-
 import { createBrowserRouter } from "react-router-dom";
+import MainLayout from "@/components/Layout/layout";
 import { Home, Login, Register, Map, Member, NotFound } from "@/pages";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Home />
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "map",
+        element: <Map />,
+      },
+      {
+        path: "member",
+        element: <Member />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
   },
-  {
-    path: '/login',
-    element: <Login />
-  },
-  {
-    path: '/register',
-    element: <Register />
-  },
-  {
-    path: '/map',
-    element: <Map />
-  },
-  {
-    path: '/member',
-    element: <Member />
-  },
-  {
-    path: '*',
-    element: <NotFound />
-  },
-])
+]);
 
-export default router
+export default router;
