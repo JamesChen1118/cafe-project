@@ -10,7 +10,11 @@ const RegisterModal = ({ isOpen, onCancel, onFinish, showLoginModal }) => {
       closeIcon={
         <CloseOutlined className="text-gray-500 hover:text-[#E74C3C]" />
       }
-      maskStyle={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
+      styles={{
+        mask: {
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+        },
+      }}
       className="login-modal"
     >
       <div className="p-6">

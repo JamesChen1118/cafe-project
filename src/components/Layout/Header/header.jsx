@@ -65,31 +65,29 @@ const Header = () => {
     setIsLoginModalOpen(true);
   };
 
-  // 用戶選單
-  const userMenu = (
-    <Menu
-      items={[
-        {
-          key: "login",
-          label: "登入",
-          onClick: showLoginModal, // 改為打開 Modal
+  // 修改用戶選單配置
+  const userMenu = {
+    items: [
+      {
+        key: "login",
+        label: "登入",
+        onClick: showLoginModal,
+      },
+      {
+        key: "register",
+        label: "註冊",
+        onClick: showRegisterModal,
+      },
+      {
+        key: "logout",
+        label: "登出",
+        danger: true,
+        onClick: () => {
+          console.log("登出");
         },
-        {
-          key: "register",
-          label: "註冊",
-          onClick: showRegisterModal, // 改為打開 Modal
-        },
-        {
-          key: "logout",
-          label: "登出",
-          danger: true,
-          onClick: () => {
-            console.log("登出");
-          },
-        },
-      ]}
-    />
-  );
+      },
+    ],
+  };
 
   return (
     <>
@@ -140,7 +138,7 @@ const Header = () => {
         </div>
 
         {/* 會員中心 */}
-        <Dropdown overlay={userMenu} placement="bottomRight">
+        <Dropdown menu={userMenu} placement="bottomRight">
           <Button
             type="text"
             icon={<UserOutlined />}
