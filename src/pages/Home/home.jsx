@@ -2,9 +2,46 @@ import { motion } from "framer-motion";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { CoffeeOutlined } from "@ant-design/icons";
+import LoginModal from "@/components/Login/login";
+import RegisterModal from "@/components/Register/register";
+import { useState } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+  const showLoginModal = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const handleLoginCancel = () => {
+    setIsLoginModalOpen(false);
+  };
+
+  const onLoginFinish = (values) => {
+    console.log("登入資訊:", values);
+    navigate("/member");
+  };
+
+  const showRegisterModal = () => {
+    setIsRegisterModalOpen(true);
+    setIsLoginModalOpen(false);
+  };
+
+  const handleRegisterCancel = () => {
+    setIsRegisterModalOpen(false);
+  };
+
+  const onRegisterFinish = (values) => {
+    console.log("註冊資訊:", values);
+    navigate("/member");
+  };
+
+  const switchToLogin = () => {
+    setIsRegisterModalOpen(false);
+    setIsLoginModalOpen(true);
+  };
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center bg-[#fef6e4] px-4">
@@ -56,12 +93,26 @@ const Home = () => {
         </Button>
         <Button
           size="large"
-          onClick={() => navigate("/member")}
+          onClick={showLoginModal}
           className="border-[#E74C3C] text-[#E74C3C] hover:text-[#D44337] hover:border-[#D44337] h-12 px-6 md:px-8 text-base md:text-lg w-full sm:w-auto"
         >
           我有會員
         </Button>
       </motion.div>
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onCancel={handleLoginCancel}
+        onFinish={onLoginFinish}
+        showRegisterModal={showRegisterModal}
+      />
+
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onCancel={handleRegisterCancel}
+        onFinish={onRegisterFinish}
+        showLoginModal={switchToLogin}
+      />
     </div>
   );
 };
