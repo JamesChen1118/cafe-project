@@ -3,15 +3,20 @@ import { motion } from "framer-motion";
 const Footer = () => {
   return (
     <motion.footer
-      initial={{ y: 100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 100 }}
-      className="text-center py-6 bg-[#34495E] text-[#E74C3C]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-[#34495E] text-[#E74C3C] py-6 mt-auto"
     >
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 150,
+          damping: 20,
+        }}
+        className="text-center"
       >
         Copyright ©{new Date().getFullYear()} Cafe Hunter 版權所有
       </motion.div>

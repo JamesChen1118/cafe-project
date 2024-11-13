@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "@/components/Layout/layout";
 import { Home, Member, NotFound } from "@/pages";
+import Map from "@/pages/Map/map";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "map",
+        element: <Map />,
       },
       {
         path: "member",

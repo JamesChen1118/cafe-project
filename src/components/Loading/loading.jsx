@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CoffeeOutlined } from "@ant-design/icons";
 
-const Loading = ({ onAnimationComplete }) => {
+const Loading = ({ onAnimationComplete, text = "Cafe Hunter" }) => {
   return (
     <motion.div
       className="fixed inset-0 bg-[#34495E] flex flex-col items-center justify-center z-[9999]"
@@ -54,7 +54,7 @@ const Loading = ({ onAnimationComplete }) => {
             bounce: 0.4,
           }}
         >
-          Cafe Hunter
+          {text}
         </motion.h1>
       </div>
     </motion.div>
