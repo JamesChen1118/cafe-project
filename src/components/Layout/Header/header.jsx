@@ -6,7 +6,7 @@ import {
   LockOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, useScroll } from "framer-motion";
 import { Input, Dropdown, Button, Space, Menu, Modal, Form } from "antd";
 import FilterSidebar from "@/components/FilterSidebar/filterSidebar";
@@ -17,6 +17,8 @@ const { Search } = Input;
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isMapPage = location.pathname === "/map";
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -119,24 +121,29 @@ const Header = () => {
           </span>
         </motion.div>
 
-        {/* 搜尋區域 */}
-        <div className="flex-1 px-2 md:px-8 flex items-center justify-center">
-          <Space className="w-full max-w-[600px]">
-            <Search
-              placeholder="搜尋咖啡廳..."
-              onSearch={(value) => console.log("搜尋:", value)}
-              className="w-full md:w-96"
-              size="large"
-            />
-            <Button
-              icon={<SearchOutlined />}
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="min-w-[60px]"
-            >
-              <span className="hidden sm:inline">篩選</span>
-            </Button>
-          </Space>
-        </div>
+        {/* 搜尋區域 - 只在地圖頁面顯示 */}
+        {isMapPage ? (
+          <div className="flex-1 px-2 md:px-8 flex items-center justify-center">
+            <Space className="w-full max-w-[600px]">
+              <Search
+                placeholder="搜尋咖啡廳..."
+                onSearch={(value) => console.log("搜尋:", value)}
+                className="w-full md:w-96"
+                size="large"
+              />
+              <Button
+                icon={<SearchOutlined />}
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className="min-w-[60px]"
+              >
+                <span className="hidden sm:inline">篩選</span>
+              </Button>
+            </Space>
+          </div>
+        ) : (
+          // 非地圖頁面時的空白區域
+          <div className="flex-1" />
+        )}
 
         {/* 會員中心 */}
         <Dropdown menu={userMenu} placement="bottomRight">
@@ -153,6 +160,14 @@ const Header = () => {
       {/* 佔位元素 */}
       <div className="h-16"></div>
 
+      {/* FilterSidebar 只在地圖頁面時渲染 */}
+      {isMapPage && (
+        <FilterSidebar
+          isOpen={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
+        />
+      )}
+
       <LoginModal
         isOpen={isLoginModalOpen}
         onCancel={handleLoginCancel}
@@ -165,11 +180,6 @@ const Header = () => {
         onCancel={handleRegisterCancel}
         onFinish={onRegisterFinish}
         showLoginModal={switchToLogin}
-      />
-
-      <FilterSidebar
-        isOpen={isFilterOpen}
-        onClose={() => setIsFilterOpen(false)}
       />
     </>
   );
