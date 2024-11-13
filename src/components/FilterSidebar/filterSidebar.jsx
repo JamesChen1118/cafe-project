@@ -321,11 +321,9 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                       className="w-full"
                       allowClear
                       mode="multiple"
-                      maxTagCount={2}
-                      maxTagPlaceholder={(omittedValues) =>
-                        `+ ${omittedValues.length} ...`
-                      }
                       tagRender={tagRender}
+                      style={{ minHeight: "32px" }}
+                      dropdownStyle={{ maxHeight: "400px" }}
                     >
                       {districts.map((district) => (
                         <Option key={district.value} value={district.value}>
@@ -340,11 +338,9 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                       className="w-full"
                       allowClear
                       mode="multiple"
-                      maxTagCount={2}
-                      maxTagPlaceholder={(omittedValues) =>
-                        `+ ${omittedValues.length} ...`
-                      }
                       tagRender={tagRender}
+                      style={{ minHeight: "32px" }}
+                      dropdownStyle={{ maxHeight: "400px" }}
                     >
                       {Object.entries(mrtLines).map(([line, { stations }]) => (
                         <OptGroup label={line} key={line}>
@@ -393,11 +389,9 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                     className="w-full"
                     allowClear
                     mode="multiple"
-                    maxTagCount={2}
-                    maxTagPlaceholder={(omittedValues) =>
-                      `+ ${omittedValues.length} ...`
-                    }
                     tagRender={tagRender}
+                    style={{ minHeight: "32px" }}
+                    dropdownStyle={{ maxHeight: "400px" }}
                   >
                     {foodTypes.map((type) => (
                       <Option key={type.value} value={type.value}>
@@ -419,11 +413,9 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                     className="w-full"
                     allowClear
                     mode="multiple"
-                    maxTagCount={2}
-                    maxTagPlaceholder={(omittedValues) =>
-                      `+ ${omittedValues.length} ...`
-                    }
                     tagRender={tagRender}
+                    style={{ minHeight: "32px" }}
+                    dropdownStyle={{ maxHeight: "400px" }}
                   >
                     {facilities.map((facility) => (
                       <Option key={facility.value} value={facility.value}>
