@@ -25,9 +25,7 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const { scrollY } = useScroll();
 
-  // 簡化的滾動監聽
   scrollY.onChange((latest) => {
-    // 如果滾動超過 100px 就隱藏，否則顯示
     if (latest > 100) {
       setIsVisible(false);
     } else {
@@ -45,12 +43,11 @@ const Header = () => {
 
   const onLoginFinish = (values) => {
     console.log("登入資訊:", values);
-    // 這裡之後可以加入與後端的整合
   };
 
   const showRegisterModal = () => {
     setIsRegisterModalOpen(true);
-    setIsLoginModalOpen(false); // 關閉登入 Modal
+    setIsLoginModalOpen(false);
   };
 
   const handleRegisterCancel = () => {
@@ -59,7 +56,6 @@ const Header = () => {
 
   const onRegisterFinish = (values) => {
     console.log("註冊資訊:", values);
-    // 這裡之後可以加入與後端的整合
   };
 
   const switchToLogin = () => {
@@ -67,7 +63,6 @@ const Header = () => {
     setIsLoginModalOpen(true);
   };
 
-  // 修改用戶選單配置
   const userMenu = {
     items: [
       {
@@ -121,7 +116,6 @@ const Header = () => {
           </span>
         </motion.div>
 
-        {/* 搜尋區域 - 只在地圖頁面顯示 */}
         {isMapPage ? (
           <div className="flex-1 px-2 md:px-8 flex items-center justify-center">
             <Space className="w-full max-w-[600px]">
@@ -141,11 +135,9 @@ const Header = () => {
             </Space>
           </div>
         ) : (
-          // 非地圖頁面時的空白區域
           <div className="flex-1" />
         )}
 
-        {/* 會員中心 */}
         <Dropdown menu={userMenu} placement="bottomRight">
           <Button
             type="text"
@@ -157,10 +149,8 @@ const Header = () => {
         </Dropdown>
       </motion.header>
 
-      {/* 佔位元素 */}
       <div className="h-16"></div>
 
-      {/* FilterSidebar 只在地圖頁面時渲染 */}
       {isMapPage && (
         <FilterSidebar
           isOpen={isFilterOpen}

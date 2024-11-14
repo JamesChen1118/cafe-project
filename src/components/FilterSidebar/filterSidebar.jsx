@@ -225,7 +225,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     noTimeLimit: false,
   });
 
-  // 處理選擇變更的函數
   const handleDistrictChange = (values) => {
     setSelectedDistricts(values);
   };
@@ -249,7 +248,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     }));
   };
 
-  // 重置所有選擇
   const handleReset = () => {
     setSelectedDistricts([]);
     setSelectedStations([]);
@@ -261,7 +259,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     });
   };
 
-  // 套用篩選
   const handleApply = () => {
     const filters = {
       districts: selectedDistricts,
@@ -274,7 +271,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     onClose();
   };
 
-  // 自定義標籤渲染
   const tagRender = (props) => {
     const { label, closable, onClose } = props;
     return (
@@ -293,7 +289,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* 遮罩層 */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -310,7 +305,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
           >
             <div className="p-4 h-full overflow-y-auto">
               <div className="space-y-6">
-                {/* 地區搜尋 */}
                 <div>
                   <h4 className="mb-2 text-gray-700 font-medium">地區搜尋</h4>
                   <Space direction="vertical" className="w-full">
@@ -357,7 +351,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
 
                 <Divider style={{ margin: "12px 0" }} />
 
-                {/* 營業資訊 */}
                 <div>
                   <h4 className="mb-2 text-gray-700 font-medium">營業資訊</h4>
                   <Space direction="vertical" className="w-full">
@@ -379,7 +372,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
 
                 <Divider style={{ margin: "12px 0" }} />
 
-                {/* 餐點類型 */}
                 <div>
                   <h4 className="mb-2 text-gray-700 font-medium">餐點類型</h4>
                   <Select
@@ -403,7 +395,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
 
                 <Divider style={{ margin: "12px 0" }} />
 
-                {/* 其他設施 */}
                 <div>
                   <h4 className="mb-2 text-gray-700 font-medium">其他設施</h4>
                   <Select
@@ -425,7 +416,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                   </Select>
                 </div>
 
-                {/* 按鈕區域 */}
                 <div className="sticky bottom-4 left-4 right-4 pt-4 bg-white">
                   <Space className="w-full justify-between">
                     <Button onClick={handleReset}>重置</Button>

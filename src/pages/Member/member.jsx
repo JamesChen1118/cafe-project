@@ -8,18 +8,16 @@ import {
 } from "@ant-design/icons";
 
 const Member = () => {
-  // 模擬用戶資料
   const [userData] = useState({
     username: "咖啡愛好者",
     email: "coffee@example.com",
     favorites: [
-      { id: 1, name: "星巴克 信義門市", tags: ["不限時", "插座多"] },
-      { id: 2, name: "路易莎 台大店", tags: ["安靜", "平價"] },
-      { id: 3, name: "cama café 公館店", tags: ["咖啡好喝", "環境好"] },
+      { id: 1, name: "黑金魚咖啡廳", tags: ["不限時", "環境好"] },
+      { id: 2, name: "路易莎 南京建國店", tags: ["不限時", "平價"] },
+      { id: 3, name: "Fika Fika Cafe", tags: ["咖啡好喝", "環境好"] },
     ],
   });
 
-  // 標籤管理
   const [tags, setTags] = useState([
     "不限時",
     "插座多",
@@ -31,7 +29,6 @@ const Member = () => {
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
-  // 新增標籤
   const handleAddTag = () => {
     if (inputValue && !tags.includes(inputValue)) {
       setTags([...tags, inputValue]);
@@ -40,7 +37,6 @@ const Member = () => {
     setInputVisible(false);
   };
 
-  // 定義頁籤內容
   const items = [
     {
       key: "1",

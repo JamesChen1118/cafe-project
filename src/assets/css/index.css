@@ -8,7 +8,6 @@
     box-sizing: border-box;
 }
 
-/* 登入 Modal 樣式 */
 .login-modal .ant-modal-content {
     border-radius: 12px;
     overflow: hidden;
@@ -30,12 +29,10 @@
     background-color: #D44337 !important;
 }
 
-/* 在載入地圖時隱藏 header */
 body.loading-map header {
     display: none !important;
 }
 
-/* 防止載入時的閃爍 */
 body.loading-map {
     background-color: #34495E;
 }
