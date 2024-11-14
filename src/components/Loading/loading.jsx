@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CoffeeOutlined } from "@ant-design/icons";
 
-const Loading = ({ onAnimationComplete, text = "Cafe Hunter" }) => {
+const Loading = () => {
   return (
     <motion.div
       className="fixed inset-0 bg-[#34495E] flex flex-col items-center justify-center z-[9999]"
@@ -15,11 +15,8 @@ const Loading = ({ onAnimationComplete, text = "Cafe Hunter" }) => {
         ease: "easeInOut",
         delay: 3,
       }}
-      onAnimationComplete={onAnimationComplete}
     >
-      {/* 使用 flex container 包裝整個內容 */}
       <div className="flex flex-col items-center justify-center h-full">
-        {/* 咖啡圖標載入動畫 */}
         <div className="flex space-x-4">
           {[0, 1, 2, 3, 4].map((index) => (
             <motion.div
@@ -39,7 +36,6 @@ const Loading = ({ onAnimationComplete, text = "Cafe Hunter" }) => {
           ))}
         </div>
 
-        {/* 標題 */}
         <motion.h1
           className="text-5xl font-bold text-[#E74C3C] mt-12"
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -54,7 +50,7 @@ const Loading = ({ onAnimationComplete, text = "Cafe Hunter" }) => {
             bounce: 0.4,
           }}
         >
-          {text}
+          Cafe Hunter
         </motion.h1>
       </div>
     </motion.div>
