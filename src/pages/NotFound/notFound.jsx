@@ -38,7 +38,7 @@ const NotFound = () => {
         className="text-center mb-8"
       >
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-          Oops! 再回去逛逛吧~
+          Oops! 回到上一頁吧~
         </h2>
       </motion.div>
 
