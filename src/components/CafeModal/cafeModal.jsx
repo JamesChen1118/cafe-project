@@ -7,7 +7,7 @@ const CafeModal = ({ cafe, isOpen, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      className="relative"
       onClick={onClose}
     >
       <motion.div
@@ -15,7 +15,7 @@ const CafeModal = ({ cafe, isOpen, onClose }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
         transition={{ type: "spring", damping: 20 }}
-        className="bg-white rounded-lg p-6 w-full max-w-md mx-4"
+        className="bg-white rounded-lg p-6 w-[90vw] max-w-md shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* 咖啡廳名稱 */}

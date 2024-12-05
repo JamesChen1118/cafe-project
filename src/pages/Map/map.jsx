@@ -32,39 +32,46 @@ const Map = () => {
   };
 
   return (
-    <div className="h-[130vh] w-full relative">
-      <MapContainer
-        className="h-full w-full"
-        center={[25.0478, 121.5171]}
-        zoom={15}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-
-        {cafes.map((cafe, index) => (
-          <Marker
-            key={index}
-            position={[
-              cafe.location.coordinates[1],
-              cafe.location.coordinates[0],
-            ]}
-            eventHandlers={{
-              click: () => openModal(cafe),
-            }}
+    <div className="relative w-full" style={{ height: "calc(100vh - 64px)" }}>
+      <div className="absolute inset-0">
+        <MapContainer
+          className="w-full h-full"
+          center={[25.0478, 121.5171]}
+          zoom={15}
+          scrollWheelZoom={false}
+          style={{ filter: isModalOpen ? "brightness(0.7)" : "none" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        ))}
-      </MapContainer>
+
+          {cafes.map((cafe, index) => (
+            <Marker
+              key={index}
+              position={[
+                cafe.location.coordinates[1],
+                cafe.location.coordinates[0],
+              ]}
+              eventHandlers={{
+                click: () => openModal(cafe),
+              }}
+            />
+          ))}
+        </MapContainer>
+      </div>
 
       <AnimatePresence>
         {isModalOpen && selectedCafe && (
-          <CafeModal
-            cafe={selectedCafe}
-            isOpen={isModalOpen}
-            onClose={closeModal}
-          />
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center pointer-events-none">
+            <div className="pointer-events-auto">
+              <CafeModal
+                cafe={selectedCafe}
+                isOpen={isModalOpen}
+                onClose={closeModal}
+              />
+            </div>
+          </div>
         )}
       </AnimatePresence>
     </div>
