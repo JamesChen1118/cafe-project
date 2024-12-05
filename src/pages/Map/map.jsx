@@ -1,38 +1,72 @@
 import { useState, useEffect } from "react";
-import Loading from "@/components/Loading/loading";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import CafeModal from "@/components/CafeModal/cafeModal";
+import cafes from "../../../server/data/cafes.js";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
+import { AnimatePresence } from "framer-motion";
+
+// 修正 Marker 圖示的問題
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: iconRetina,
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+});
 
 const Map = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedCafe, setSelectedCafe] = useState(null);
 
-  useEffect(() => {
-    if (isLoading) {
-      document.body.classList.add("loading-map");
-    } else {
-      document.body.classList.remove("loading-map");
-    }
+  const openModal = (cafe) => {
+    setSelectedCafe(cafe);
+    setModalOpen(true);
+  };
 
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => {
-      clearTimeout(timer);
-      document.body.classList.remove("loading-map");
-    };
-  }, [isLoading]);
-
-  if (isLoading) {
-    return (
-      <Loading
-        onAnimationComplete={() => setIsLoading(false)}
-        text="載入地圖中..."
-      />
-    );
-  }
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedCafe(null);
+  };
 
   return (
     <div className="h-[130vh] w-full relative">
-      <div className="h-full w-full bg-gray-100">地圖將顯示在這裡</div>
+      <MapContainer
+        className="h-full w-full"
+        center={[25.0478, 121.5171]}
+        zoom={15}
+        scrollWheelZoom={false}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        {cafes.map((cafe, index) => (
+          <Marker
+            key={index}
+            position={[
+              cafe.location.coordinates[1],
+              cafe.location.coordinates[0],
+            ]}
+            eventHandlers={{
+              click: () => openModal(cafe),
+            }}
+          />
+        ))}
+      </MapContainer>
+
+      <AnimatePresence>
+        {isModalOpen && selectedCafe && (
+          <CafeModal
+            cafe={selectedCafe}
+            isOpen={isModalOpen}
+            onClose={closeModal}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
