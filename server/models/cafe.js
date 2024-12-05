@@ -41,7 +41,7 @@ const cafeSchema = new mongoose.Schema({
     collection: 'cafe'
 });
 
-// 建立地理空間索引
+// 添加地理空間索引
 cafeSchema.index({ location: '2dsphere' });
 
 const Cafe = mongoose.model('Cafe', cafeSchema);

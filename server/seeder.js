@@ -14,13 +14,20 @@ const importData = async () => {
         await Cafe.deleteMany();
         console.log("已清除既有的咖啡廳資料");
 
+        // 驗證資料格式
+        cafes.forEach(cafe => {
+            if (!cafe.location || !cafe.location.coordinates) {
+                throw new Error(`Cafe ${cafe.name} missing location coordinates`);
+            }
+        });
+
         // 匯入新的咖啡廳資料
         await Cafe.insertMany(cafes);
         console.log("咖啡廳資料匯入成功");
 
         process.exit();
     } catch (error) {
-        console.error(`錯誤: ${error}`);
+        console.error(`錯誤: ${error.message}`);
         process.exit(1);
     }
 };
@@ -32,7 +39,7 @@ const destroyData = async () => {
 
         process.exit();
     } catch (error) {
-        console.error(`錯誤: ${error}`);
+        console.error(`錯誤: ${error.message}`);
         process.exit(1);
     }
 };

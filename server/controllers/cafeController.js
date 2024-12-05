@@ -4,13 +4,22 @@ import jwt from 'jsonwebtoken';
 // 獲取所有咖啡廳
 export const getCafes = async (req, res) => {
     try {
-        console.log("Fetching cafes...");
-        const cafes = await Cafe.find({});
+        console.log("Fetching cafes from database...");
+        const cafes = await Cafe.find({}).lean();
         console.log(`Found ${cafes.length} cafes`);
+
+        if (!cafes || cafes.length === 0) {
+            console.log("No cafes found in database");
+            return res.status(404).json({ message: "No cafes found" });
+        }
+
         res.json(cafes);
     } catch (error) {
         console.error("Error in getCafes:", error);
-        res.status(500).json({ message: error.message });
+        res.status(500).json({
+            message: "Server error while fetching cafes",
+            error: error.message
+        });
     }
 };
 
