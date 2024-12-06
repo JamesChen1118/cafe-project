@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
@@ -12,6 +12,7 @@ import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import { AnimatePresence } from "framer-motion";
 import "@/pages/Map/map.css";
+import Supercluster from "supercluster";
 
 const cafeIcon = L.divIcon({
   className: "custom-cafe-marker",
@@ -29,6 +30,109 @@ const cafeIcon = L.divIcon({
   iconAnchor: [20, 40],
   popupAnchor: [0, -40],
 });
+
+const ClusterLayer = ({ cafes, openModal }) => {
+  const [clusters, setClusters] = useState([]);
+  const map = useMap();
+
+  useEffect(() => {
+    const supercluster = new Supercluster({
+      radius: 80,
+      maxZoom: 16,
+      minZoom: 0,
+      minPoints: 2,
+      nodeSize: 64,
+    });
+
+    const points = cafes.map((cafe, index) => ({
+      type: "Feature",
+      properties: {
+        cluster: false,
+        cafeId: index,
+        cafe: cafe,
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [
+          cafe.location.coordinates[0],
+          cafe.location.coordinates[1],
+        ],
+      },
+    }));
+
+    supercluster.load(points);
+
+    const updateClusters = () => {
+      const bounds = map.getBounds();
+      const bbox = [
+        bounds.getWest(),
+        bounds.getSouth(),
+        bounds.getEast(),
+        bounds.getNorth(),
+      ];
+      const zoom = Math.floor(map.getZoom());
+      const clusters = supercluster.getClusters(bbox, zoom);
+      setClusters(clusters);
+    };
+
+    map.on("moveend", updateClusters);
+    updateClusters();
+
+    return () => {
+      map.off("moveend", updateClusters);
+    };
+  }, [cafes, map]);
+
+  return clusters.map((cluster) => {
+    const [longitude, latitude] = cluster.geometry.coordinates;
+    const { cluster: isCluster, point_count: pointCount } = cluster.properties;
+
+    if (isCluster) {
+      const size =
+        pointCount < 10 ? 64 : pointCount < 25 ? 72 : pointCount < 50 ? 80 : 88;
+
+      return (
+        <Marker
+          key={`cluster-${cluster.id}`}
+          position={[latitude, longitude]}
+          icon={L.divIcon({
+            className: "cluster-icon",
+            html: `
+              <div class="cluster-icon-inner" style="width: ${size}px; height: ${size}px;">
+                <div class="cluster-icon-text">${pointCount}</div>
+              </div>
+            `,
+            iconSize: [size, size],
+            iconAnchor: [size / 2, size / 2],
+          })}
+          eventHandlers={{
+            click: () => {
+              const expansionZoom = Math.min(
+                supercluster.getClusterExpansionZoom(cluster.id),
+                maxZoom
+              );
+              map.setView([latitude, longitude], expansionZoom, {
+                animate: true,
+              });
+            },
+          }}
+        />
+      );
+    } else {
+      const cafe = cafes[cluster.properties.cafeId];
+      return (
+        <Marker
+          key={`cafe-${cluster.properties.cafeId}`}
+          position={[latitude, longitude]}
+          icon={cafeIcon}
+          eventHandlers={{
+            click: () => openModal(cafe),
+          }}
+        />
+      );
+    }
+  });
+};
 
 const Map = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -58,20 +162,7 @@ const Map = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-
-          {cafes.map((cafe, index) => (
-            <Marker
-              key={index}
-              position={[
-                cafe.location.coordinates[1],
-                cafe.location.coordinates[0],
-              ]}
-              icon={cafeIcon}
-              eventHandlers={{
-                click: () => openModal(cafe),
-              }}
-            />
-          ))}
+          <ClusterLayer cafes={cafes} openModal={openModal} />
         </MapContainer>
       </div>
 
