@@ -13,7 +13,6 @@ import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import { AnimatePresence } from "framer-motion";
 import "@/pages/Map/map.css";
 
-// 設定 marker 圖示
 const greenIcon = L.icon({
   iconUrl:
     "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
