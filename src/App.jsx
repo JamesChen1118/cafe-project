@@ -1,34 +1,31 @@
+import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import Loading from "@/components/Loading/loading";
-import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 
-function App() {
+const App = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
-  useEffect(() => {
-    // 模擬載入時間
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (isLoading) {
-      document.body.classList.add("loading-map");
-    } else {
-      document.body.classList.remove("loading-map");
-    }
-  }, [isLoading]);
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+    // 縮短等待時間
+    setTimeout(() => setShowContent(true), 100);
+  };
 
   return (
     <>
-      {isLoading && <Loading />}
-      <RouterProvider router={router} />
+      <AnimatePresence>
+        {isLoading && <Loading onComplete={handleLoadingComplete} />}
+      </AnimatePresence>
+      {showContent && (
+        <div style={{ opacity: isLoading ? 0 : 1 }}>
+          <RouterProvider router={router} />
+        </div>
+      )}
     </>
   );
-}
+};
 
 export default App;

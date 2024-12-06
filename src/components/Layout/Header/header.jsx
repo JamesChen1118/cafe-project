@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   CoffeeOutlined,
   SearchOutlined,
@@ -20,16 +20,6 @@ const Header = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const showLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -89,19 +79,31 @@ const Header = () => {
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
+        initial={{ y: "-100%" }}
         animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`fixed top-0 left-0 right-0 h-16 z-40 ${
-          isScrolled ? "bg-white shadow-md" : "bg-[#34495E]"
-        }`}
+        transition={{
+          type: "spring",
+          stiffness: 200,
+          damping: 20,
+          duration: 0.5,
+          delay: 0.1,
+        }}
+        className="fixed top-0 left-0 right-0 h-16 z-40 bg-[#34495E] shadow-lg"
       >
-        <div className="container mx-auto px-4 h-full flex items-center justify-between">
+        <motion.div
+          className="container mx-auto px-4 h-full flex items-center justify-between"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+        >
           <motion.div
             className="flex items-center cursor-pointer"
             onClick={() => navigate("/")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
           >
             <CoffeeOutlined className="text-xl md:text-2xl text-[#E74C3C]" />
             <span className="text-[#E74C3C] text-lg md:text-xl font-bold ml-2">
@@ -110,7 +112,12 @@ const Header = () => {
           </motion.div>
 
           {isMapPage && (
-            <div className="flex-1 px-2 md:px-8 flex items-center justify-center">
+            <motion.div
+              className="flex-1 px-2 md:px-8 flex items-center justify-center"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
               <Space className="w-full max-w-[600px]">
                 <Search
                   placeholder="搜尋咖啡廳..."
@@ -126,21 +133,27 @@ const Header = () => {
                   <span className="hidden sm:inline">篩選</span>
                 </Button>
               </Space>
-            </div>
+            </motion.div>
           )}
 
-          <Dropdown menu={userMenu} placement="bottomRight">
-            <Button
-              type="text"
-              icon={<UserOutlined />}
-              className={`${
-                isScrolled ? "text-gray-700" : "text-gray-300"
-              } hover:text-[#E74C3C]`}
-            >
-              <span className="hidden sm:inline">會員中心</span>
-            </Button>
-          </Dropdown>
-        </div>
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <Dropdown menu={userMenu} placement="bottomRight">
+              <Button
+                type="text"
+                icon={<UserOutlined className="text-[#E74C3C]" />}
+                className="hover:opacity-80"
+              >
+                <span className="hidden sm:inline text-[#E74C3C]">
+                  會員中心
+                </span>
+              </Button>
+            </Dropdown>
+          </motion.div>
+        </motion.div>
       </motion.header>
 
       <div className="h-16" />

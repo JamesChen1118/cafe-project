@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CoffeeOutlined } from "@ant-design/icons";
 
-const Loading = () => {
+const Loading = ({ onComplete }) => {
   return (
     <motion.div
       className="fixed inset-0 bg-[#34495E] flex flex-col items-center justify-center z-[9999]"
@@ -15,6 +15,7 @@ const Loading = () => {
         ease: "easeInOut",
         delay: 3,
       }}
+      onAnimationComplete={onComplete}
     >
       <div className="flex flex-col items-center justify-center h-full">
         <div className="flex space-x-4">
