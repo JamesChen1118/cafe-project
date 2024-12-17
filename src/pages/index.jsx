@@ -1,4 +1,4 @@
-import Home from "./Home/home";
+import Home from "./Home";
 import Member from "./Member/member";
 import NotFound from "./NotFound/notFound";
 

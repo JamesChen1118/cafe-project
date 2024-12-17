@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
-import Loading from "@/components/Loading/loading";
+import Loading from "@/components/Loading/index.jsx";
 import { AnimatePresence } from "framer-motion";
 
 const App = () => {
@@ -10,7 +10,6 @@ const App = () => {
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
-    // 縮短等待時間
     setTimeout(() => setShowContent(true), 100);
   };
 

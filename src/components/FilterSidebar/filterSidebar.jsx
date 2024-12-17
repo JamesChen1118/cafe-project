@@ -5,7 +5,6 @@ import { Select, Space, Button, Divider, Switch } from "antd";
 const { Option, OptGroup } = Select;
 
 const FilterSidebar = ({ isOpen, onClose }) => {
-  // 台北市分區選項
   const districts = [
     { value: "zhongzheng", label: "中正區" },
     { value: "datong", label: "大同區" },
@@ -21,7 +20,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     { value: "wenshan", label: "文山區" },
   ];
 
-  // 捷運路線配置 - 完整的站點數據
   const mrtLines = {
     文湖線: {
       value: "brown",
@@ -205,7 +203,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     { value: "brunch", label: "早午餐" },
   ];
 
-  // 設施選項
   const facilities = [
     { value: "wifi", label: "WiFi" },
     { value: "socket", label: "插座" },
@@ -215,7 +212,6 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     { value: "parking", label: "停車場" },
   ];
 
-  // 添加狀態管理
   const [selectedDistricts, setSelectedDistricts] = useState([]);
   const [selectedStations, setSelectedStations] = useState([]);
   const [selectedFoodTypes, setSelectedFoodTypes] = useState([]);

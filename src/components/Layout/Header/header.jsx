@@ -8,8 +8,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Input, Dropdown, Button, Space } from "antd";
 import FilterSidebar from "@/components/FilterSidebar/filterSidebar";
-import LoginModal from "@/components/Login/login";
-import RegisterModal from "@/components/Register/register";
+import LoginModal from "@/components/Login/index";
+import RegisterModal from "@/components/Register/index";
 
 const { Search } = Input;
 
