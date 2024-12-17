@@ -11,7 +11,7 @@ import FilterSidebar from "@/components/FilterSidebar/filterSidebar";
 import LoginModal from "@/components/Login/index";
 import RegisterModal from "@/components/Register/index";
 
-const { Search } = Input;
+const { Search } = Input; 
 
 const Header = () => {
   const navigate = useNavigate();

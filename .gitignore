@@ -37,9 +37,6 @@ dist-ssr/
 # Operating system files
 Thumbs.db
 
-# Tailwind CSS
-tailwind.config.js
-
 # PostCSS 
 .postcssrc
 .postcssrc.json

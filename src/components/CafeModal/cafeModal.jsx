@@ -28,17 +28,19 @@ const CafeModal = ({ cafe, isOpen, onClose }) => {
       >
         <Card
           className="shadow-xl"
-          headStyle={{
-            background: "#34495E",
-            borderTopLeftRadius: "8px",
-            borderTopRightRadius: "8px",
-            padding: "16px",
-          }}
-          bodyStyle={{
-            background: "#f8f9fa",
-            borderBottomLeftRadius: "8px",
-            borderBottomRightRadius: "8px",
-            padding: "20px",
+          styles={{
+            header: {
+              background: "#34495E",
+              borderTopLeftRadius: "8px",
+              borderTopRightRadius: "8px",
+              padding: "16px",
+            },
+            body: {
+              background: "#f8f9fa",
+              borderBottomLeftRadius: "8px",
+              borderBottomRightRadius: "8px",
+              padding: "20px",
+            }
           }}
           title={
             <div className="flex items-center justify-between">

@@ -1,49 +1,25 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const cafeSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    district: {
-        type: String,
-        required: true,
-    },
-    mrt: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    businessHours: {
-        type: String,
-        required: true,
-    },
-    address: {
-        type: String,
-        required: true,
-    },
-    location: {
-        type: {
-            type: String,
-            enum: ['Point'],
-            required: true
-        },
-        coordinates: {
-            type: [Number],
-            required: true
-        }
-    }
+  name: {
+    type: String,
+    required: [true, '咖啡廳名稱為必填'],
+  },
+  address: {
+    type: String,
+    required: [true, '地址為必填'],
+  },
+  phone: {
+    type: String,
+  },
+  openingHours: {
+    type: String,
+  },
+  description: {
+    type: String,
+  }
 }, {
-    timestamps: true,
-    collection: 'cafe'
+  timestamps: true
 });
 
-// 添加地理空間索引
-cafeSchema.index({ location: '2dsphere' });
-
-const Cafe = mongoose.model('Cafe', cafeSchema);
-
-export default Cafe; 
+export default mongoose.model('Cafe', cafeSchema); 
