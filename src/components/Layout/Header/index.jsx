@@ -7,11 +7,12 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Input, Dropdown, Button, Space } from "antd";
-import FilterSidebar from "@/components/FilterSidebar/filterSidebar";
+import FilterSidebar from "@/components/FilterSidebar/index";
 import LoginModal from "@/components/Login/index";
 import RegisterModal from "@/components/Register/index";
+import axios from "axios";
 
-const { Search } = Input; 
+const { Search } = Input;
 
 const Header = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const Header = () => {
   const onLoginFinish = (values) => {
     console.log("登入資訊:", values);
     navigate("/member");
+    setIsLoginModalOpen(false);
   };
 
   const showRegisterModal = () => {

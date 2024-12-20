@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster";
-import CafeModal from "@/components/CafeModal/cafeModal";
+import CafeModal from "@/components/CafeModal/index.jsx";
 import cafes from "../../../server/data/cafes.js";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
