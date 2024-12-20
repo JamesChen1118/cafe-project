@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import Header from "@/components/Layout/Header/header";
-import Footer from "@/components/Layout/Footer/footer";
+import Header from "@/components/Layout/Header/index";
+import Footer from "@/components/Layout/Footer/index";
 
 const MainLayout = () => {
   const location = useLocation();
