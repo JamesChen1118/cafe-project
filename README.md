@@ -1,8 +1,33 @@
-# React + Vite
+# Cafe Project - 探索最棒的咖啡廳
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Cafe Project** 是一個專為咖啡愛好者加上遠端或是開發工作者打造的平台，旨在探索台北市適合工作的咖啡廳，提供詳細資訊並結合個人化功能，提升用戶的使用體驗。此專案結合了線上訂位、菜單展示與使用者評論等功能，讓每位顧客都能找到屬於自己的理想咖啡廳。
 
-Currently, two official plugins are available:
+## 專案展示
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Demo 連結](https://render.com/) - 即刻體驗 Cafe Project 的服務。
+
+![Cafe Project 頁面示例](https://via.placeholder.com/800x400) <!-- 可替換為真實的截圖連結 -->
+
+## 功能特色
+
+- **咖啡廳資訊展示**: 提供咖啡廳詳細資訊，包括地點、菜單與評價。
+- **RWD 響應式設計**: 確保在不同裝置上的最佳瀏覽體驗。
+- **會員系統**: 支援會員註冊、登入與個人化設定。
+- **線上訂位功能**: 方便使用者快速預約心儀的咖啡廳座位。
+
+## 使用技術
+
+### 前端
+
+- **React.js**: 提供動態的使用者界面。
+- **Tailwind CSS**: 用於快速開發響應式樣式。
+- **Zustand**: 高效管理應用狀態。
+
+### 後端
+
+- **Express.js**: 架設 API 並處理資料流。
+
+### 資料庫
+
+- **MongoDB**: 用於儲存用戶與咖啡廳相關資料。
+
