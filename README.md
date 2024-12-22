@@ -1,6 +1,6 @@
 # Cafe Hunter (城市咖啡獵人)
 
-使用 Vercel 做部屬(目前功能陸續完善中) - <a href="https://jia-project-james-projects-a1c390b9.vercel.app/" target="_blank" rel="noopener noreferrer">Cafe Hunter</a>
+使用 Vercel 做部屬(目前功能陸續完善中) - <a href="https://cafe-project-phi.vercel.app/" target="_blank" rel="noopener noreferrer">Cafe Hunter</a>
 
 <p>
   <figure>
