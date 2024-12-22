@@ -1,33 +1,141 @@
-# Cafe Project - 探索最棒的咖啡廳
+# Cafe Hunter (城市咖啡獵人)
 
-**Cafe Project** 是一個專為咖啡愛好者加上遠端或是開發工作者打造的平台，旨在探索台北市適合工作的咖啡廳，提供詳細資訊並結合個人化功能，提升用戶的使用體驗。此專案結合了線上訂位、菜單展示與使用者評論等功能，讓每位顧客都能找到屬於自己的理想咖啡廳。
+使用 Vercel 做部屬(目前功能陸續完善中) - <a href="https://jia-project-james-projects-a1c390b9.vercel.app/" target="_blank" rel="noopener noreferrer">Cafe Hunter</a>
 
-## 專案展示
+<p>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/76b55853-1c1d-409f-9239-85892e884e60" alt="Cafe Hunter - Loading" width="300">
+    <figcaption>進入網頁的載入動畫</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/e12008f8-f3ce-46b9-aef5-31a0839cc3f1" alt="Cafe Hunter - Home" width="300">
+    <figcaption>首頁</figcaption>
+  </figure>
+</p>
+<p align="center">
+  <figure>
+    <img src="https://github.com/user-attachments/assets/b7a4d502-0e28-4915-8f68-77ad49183863" alt="Cafe Hunter - Map" width="300">
+    <figcaption>串接地圖</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/ae156fce-0260-4d77-862b-d70fabfb2852" alt="Cafe Hunter - Map" width="300">
+    <figcaption>串接地圖</figcaption>
+  </figure>
+</p>
+<p align="center">
+  <figure>
+    <img src="https://github.com/user-attachments/assets/555f2c7f-29ab-4375-a037-bdf873134c55" alt="Cafe Hunter - CafeShop" width="300">
+    <figcaption>彈跳資訊視窗</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/afb36b9e-cd13-4d8d-9037-695e944f7248" alt="Cafe Hunter - Login" width="300">
+    <figcaption>會員登入</figcaption>
+  </figure>
+</p>
 
-[Demo 連結](https://render.com/) - 即刻體驗 Cafe Project 的服務。
+### 專案簡介
+  專為咖啡愛好者與遠端工作者量身打造的平台，致力於探索台北市內適合工作、唸書的咖啡廳。平台提供詳盡而豐富的資訊，結合個人化推薦功能，幫助用戶輕鬆找到理想的工作或學習空間。
 
-![Cafe Project 頁面示例](https://via.placeholder.com/800x400) <!-- 可替換為真實的截圖連結 -->
+  此專案整合了強大的篩選功能，協助顧客快速鎖定符合需求的咖啡廳，並透過 OpenStreet API 提供精準的位置與導航服務。無論是專注工作的角落、悠閒閱讀的空間，還是與朋友共享時光的聚會場所，Cafe Hunter 都是你尋找理想咖啡廳的最佳獵手。
 
-## 功能特色
+### 功能特色
 
-- **咖啡廳資訊展示**: 提供咖啡廳詳細資訊，包括地點、菜單與評價。
-- **RWD 響應式設計**: 確保在不同裝置上的最佳瀏覽體驗。
-- **會員系統**: 支援會員註冊、登入與個人化設定。
-- **線上訂位功能**: 方便使用者快速預約心儀的咖啡廳座位。
+- 地圖互動功能
+  - OpenStreetMap 整合
+  - 即時顯示咖啡廳位置
+  - 互動式標記點擊
 
-## 使用技術
+- 咖啡廳資訊管理
+  - 詳細資訊展示
+  - 營業時間查詢
+ 
 
-### 前端
+- 會員系統 
+  - JWT Token 身份驗證
+  - 登入狀態管理
+  - 會員資料管理
 
-- **React.js**: 提供動態的使用者界面。
-- **Tailwind CSS**: 用於快速開發響應式樣式。
-- **Zustand**: 高效管理應用狀態。
+- UI/UX 設計
+  - Framer Motion 動畫效果
+  - Ant Design 元件庫
+  - 響應式設計
 
-### 後端
+### 使用技術
+- 前端
+  - React
+  - React Router
+  - Framer Motion 頁面動畫效果
+  - Ant Design UI元件庫
+  - Tailwind CSS
+  - Axios API請求處理
+  - Zustand 狀態管理
 
-- **Express.js**: 架設 API 並處理資料流。
+- 後端
+  - Node.js
+  - Express.js
+  - JWT 身份驗證
 
-### 資料庫
+- 資料庫
+  - MongoDB Atlas
 
-- **MongoDB**: 用於儲存用戶與咖啡廳相關資料。
+- 地圖服務
+  - OpenStreetMap API
+ 
+- 網站部屬
+  - Vercel
+
+---
+
+# Cafe Hunter
+### Project Overview
+A platform designed for coffee lovers and remote workers, focused on discovering coffee shops in Taipei that are suitable for work and study. The platform provides detailed and comprehensive information, combined with personalized recommendation features, to help users easily find their ideal workspace or study spot.
+
+This project integrates powerful filtering capabilities to help users quickly identify coffee shops that meet their needs. Additionally, it leverages OpenStreet API to provide precise locations and navigation services. Whether it’s a corner for focused work, a cozy space for leisure reading, or a venue for hanging out with friends, Cafe Hunter is your best companion for finding the perfect coffee shop.
+
+### Features
+
+#### Interactive Map
+ - OpenStreetMap Integration
+ - Real-time Coffee Shop Locations
+ - Interactive Marker Click
+
+
+#### Coffee Shop Information Management
+ - Detailed Information Display
+ - Business Hours Inquiry
+ - Membership System
+
+#### JWT Token Authentication
+ - Login State Management
+ - Member Data Management
+
+#### UI/UX Design
+ - Framer Motion for Animations
+ - Ant Design Component Library
+ - Responsive Design
+
+### Technology Stack
+
+#### Frontend
+ - React
+ - React Router
+ - Framer Motion for Page Transitions
+ - Ant Design UI Components
+ - Tailwind CSS
+ - Axios for API Requests
+ - Zustand for State Management
+   
+#### Backend
+ - Node.js
+ - Express.js
+ - JWT Authentication
+
+#### Database
+ - MongoDB Atlas
+
+#### Map Service
+ - OpenStreetMap API
+
+#### Deployment
+ - Vercel
 
