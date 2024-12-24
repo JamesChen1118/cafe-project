@@ -5,9 +5,9 @@ import { getToken } from "@/utils/auth";
 const API_URL = "http://localhost:8080/api";
 
 export const userApi = {
-  login: async (username, password) => {
+  login: async (email, password) => {
     const { data } = await server.post("/users/login", {
-      username,
+      email,
       password,
     });
     return data;
@@ -26,14 +26,13 @@ export const userApi = {
     const { data } = await server.get("/users", config);
     return data;
   },
-  UpdateUser: async () => {
-    const token = getToken();
+  updateUser: async (userData) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await server.put("/users", config);
+    const { data } = await server.put("/users", userData, config);
     return data;
   },
   getCart: async (userId) => {

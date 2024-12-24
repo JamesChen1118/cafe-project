@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
 import { CoffeeOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loading from "@/components/Loading/index";
 import LoginModal from "@/components/Login/index";
 import RegisterModal from "@/components/Register/index";
-import { useState } from "react";
-import Loading from "@/components/Loading/index";
 
 const Home = () => {
   const navigate = useNavigate();

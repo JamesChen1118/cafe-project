@@ -1,12 +1,9 @@
 import express from 'express';
-// import cafeController from '../../controllers/cafeController.js';
-import auth from '../../middleware/auth.js';
+import cafeController from '../../controllers/cafeController.js';
+import middleware from '../../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// router.get('/', cafeController.getCafes);
-// router.post('/', auth, cafeController.createCafe);
-// router.put('/:id', auth, cafeController.updateCafe);
-// router.delete('/:id', auth, cafeController.deleteCafe);
+router.get('/', cafeController.getCafes);
 
-export default router; 
+export default router;

@@ -1,15 +1,11 @@
 import { useState } from "react";
-import {
-  CoffeeOutlined,
-  SearchOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { CoffeeOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Input, Dropdown, Button, Space } from "antd";
-import FilterSidebar from "@/components/FilterSidebar/index";
 import LoginModal from "@/components/Login/index";
 import RegisterModal from "@/components/Register/index";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 const { Search } = Input;
@@ -18,7 +14,6 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMapPage = location.pathname === "/map";
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
@@ -30,10 +25,39 @@ const Header = () => {
     setIsLoginModalOpen(false);
   };
 
-  const onLoginFinish = (values) => {
+  const onLoginFinish = async (values) => {
     console.log("登入資訊:", values);
-    navigate("/member");
-    setIsLoginModalOpen(false);
+    try {
+      const response = await axios.post("/api/users/login", values);
+      console.log("登入成功", response.data);
+      localStorage.setItem("token", response.data.token);
+      navigate("/member");
+    } catch (error) {
+      console.error(
+        "登入失敗",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  const handleRegister = async (values) => {
+    try {
+      const response = await axios.post("/api/users/register", values);
+      Swal.fire({
+        title: "註冊成功",
+        icon: "success",
+        confirmButtonText: "確定",
+      });
+      setIsRegisterModalOpen(false);
+      setIsLoginModalOpen(true);
+    } catch (error) {
+      Swal.fire({
+        title: "註冊失敗",
+        text: error.response?.data?.message || "註冊失敗",
+        icon: "error",
+        confirmButtonText: "確定",
+      });
+    }
   };
 
   const showRegisterModal = () => {
@@ -43,16 +67,6 @@ const Header = () => {
 
   const handleRegisterCancel = () => {
     setIsRegisterModalOpen(false);
-  };
-
-  const onRegisterFinish = (values) => {
-    console.log("註冊資訊:", values);
-    navigate("/member");
-  };
-
-  const switchToLogin = () => {
-    setIsRegisterModalOpen(false);
-    setIsLoginModalOpen(true);
   };
 
   const userMenu = {
@@ -127,13 +141,6 @@ const Header = () => {
                   className="w-full md:w-96"
                   size="large"
                 />
-                <Button
-                  icon={<SearchOutlined />}
-                  onClick={() => setIsFilterOpen(!isFilterOpen)}
-                  className="min-w-[60px]"
-                >
-                  <span className="hidden sm:inline">篩選</span>
-                </Button>
               </Space>
             </motion.div>
           )}
@@ -160,13 +167,6 @@ const Header = () => {
 
       <div className="h-16" />
 
-      {isMapPage && (
-        <FilterSidebar
-          isOpen={isFilterOpen}
-          onClose={() => setIsFilterOpen(false)}
-        />
-      )}
-
       <LoginModal
         isOpen={isLoginModalOpen}
         onCancel={handleLoginCancel}
@@ -177,8 +177,11 @@ const Header = () => {
       <RegisterModal
         isOpen={isRegisterModalOpen}
         onCancel={handleRegisterCancel}
-        onFinish={onRegisterFinish}
-        showLoginModal={switchToLogin}
+        onFinish={handleRegister}
+        showLoginModal={() => {
+          setIsRegisterModalOpen(false);
+          setIsLoginModalOpen(true);
+        }}
       />
     </>
   );

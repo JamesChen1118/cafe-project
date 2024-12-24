@@ -39,7 +39,7 @@ export const register = async (req, res) => {
         );
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).send('獲取用戶資料失敗');
     }
 };
 
@@ -74,6 +74,39 @@ export const login = async (req, res) => {
         );
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).send('獲取用戶資料失敗');
     }
 };
+
+export const getUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('獲取用戶資料失敗');
+    }
+};
+
+export const updateUser = async (req, res) => {
+    try {
+        const { username, email, phone } = req.body;
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({ msg: '用戶不存在' });
+        }
+
+        if (username) user.username = username;
+        if (email) user.email = email;
+        if (phone) user.phone = phone;
+
+        await user.save();
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('更新用戶資料失敗');
+    }
+};
+
+export default { register, login, getUser, updateUser };
